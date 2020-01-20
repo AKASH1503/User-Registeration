@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<ul class="nav nav-tabs" rel="stylesheet" type="text/css">
+    <li rel="stylesheet" type="text/css"><a data-toggle="tab" href="#firsttab">View All</a></li>
+    <li class="active" rel="stylesheet" type="text/css"><a data-toggle="tab" href="#secondtab">Add New</a></li>
+</ul>
+<div class="tab-content">
+    <div id="firsttab" class="tab-pane false in ">@Html.Action("ViewAll")</div>
+    <div id="secondtab" class="tab-pane false in active">@Html.Action("AddOrEdit")</div>
+</div>
+
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+        function activatejQueryTable() {
+            $("#employeeTable").DataTable();
+        }
+
+        $(function () {
+            activatejQueryTable();
+        });
+    </script>
+}

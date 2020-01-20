@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SampleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="UserEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cities" EntityType="SampleModel.city" />
+    <EntitySet Name="Users" EntityType="SampleModel.User" />
+    <AssociationSet Name="FK__User__City__72C60C4A" Association="SampleModel.FK__User__City__72C60C4A">
+      <End Role="city" EntitySet="cities" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="city">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="SampleModel.FK__User__City__72C60C4A" FromRole="city" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Addrss" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" />
+    <Property Name="Profile" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Gender" Type="Boolean" />
+    <NavigationProperty Name="city1" Relationship="SampleModel.FK__User__City__72C60C4A" FromRole="User" ToRole="city" />
+  </EntityType>
+  <Association Name="FK__User__City__72C60C4A">
+    <End Type="SampleModel.city" Role="city" Multiplicity="1" />
+    <End Type="SampleModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="city">
+        <PropertyRef Name="CId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
